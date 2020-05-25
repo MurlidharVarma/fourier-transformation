@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="en" style="width: 100%;">
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css" />
   <title>Lee Fourier</title>
   <style>
     body {
@@ -12,14 +13,23 @@
     }
   </style>
   <script src="./js/p5.min.js"></script>
-  <!-- <script src="./js/guitar.js"></script> -->
   <script src="./js/leepia.js"></script>
   <script src="./js/fourier.js"></script>
-  <script src="./js/drawing.js"></script>
-  <!-- <script src="./js/write.js"></script> -->
+  <script src="./js/main.js"></script>
 </head>
 
 <body>
+  <div class="menu">
+    <span class="left">
+      <span class="stick" style="font-size:1.2em; font-weight: bold;color:red">Fourier Series & Transformation</span>
+      <span class="stick">How many?: <input style="width:200px" type="range" min="1" max="20" value="2" step="1" class="slider" id="noOfCircles" oninput="configChange()"><span class="val" id="noOfCirclesValue">2</span> </span>
+      <span class="stick">Skip: <input style="width:100px" type="range" min="1" max="10" value="1" step="1" class="slider" id="skip" oninput="configChange()"><span class="val" id="skipValue">1</span> </span>
+      <span class="stick"><a href="./html/write.html">Write</a></span>
+      <span class="stick"><a href="./html/PiaLee.html">PiaLee</a></span>
+    </span>
+    <span class="credit">By Murlidhar Varma</span>
+  </div>
+  <div id="canvas-container"></div>
 </body>
 
 </html>

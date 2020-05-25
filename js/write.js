@@ -1,9 +1,9 @@
-let width = 0;
-let height = 0;
+let width = 2000;
+let height = 2000;
 let diagWidth = 100;
 let diagHeight = 100;
 
-let time = 0;
+let time = 0, CANVAS;
 
 
 let dftX=[];
@@ -18,24 +18,36 @@ let dt=0;
 
 let font, writePath;
 
+let MESSAGE = "Fourier was Genius...";
+
 function preload(){
-  // font = loadFont("./font/neon.ttf");
-  font = loadFont("./font/arial.ttf");
+  // font = loadFont("../font/neon.ttf");
+  font = loadFont("../font/arial.ttf");
 }
 
+function configChange(){
+  MESSAGE = document.querySelector("#textMessage").value;
+   convertTextToSignals();
+}
+
+
 function textPath(msg){
-  textFont(font, 50);
+  textFont(font, 75);
   fill('red');
   let p = font.textToPoints(msg, 100,100);
   return p;
 }
-function setup() {
-  width = windowWidth;
-  height = windowHeight;
 
-  createCanvas(width,height);
+function convertTextToSignals(){
 
-  writePath = textPath("Fourier was Genius...");
+  signalsY=[];
+  signalsX=[];
+  plot=[];
+  dftY=[];
+  dftX=[];
+
+  document.querySelector("#textMessage").value = MESSAGE;
+  writePath = textPath(MESSAGE);
 
   for(let a=0; a<writePath.length;a+=1){
     let x = writePath[a]['x']
@@ -53,14 +65,25 @@ function setup() {
   dftY.sort(sortBy);
 
   dt =(TWO_PI/signalsX.length);
+  
+  time=0;
+}
 
+function setup() {
+  width = max(width, windowWidth);
+  height = max(height, windowHeight);
+
+  CANVAS = createCanvas(width,height);
+  CANVAS.parent('canvas-container');
+
+  convertTextToSignals();
 }
 
 function draw() {
   background(0);
 
-  let bottom = createVector(diagWidth, diagHeight*4);
-  let top = createVector(diagWidth*4, diagHeight);
+  let bottom = createVector(diagWidth, diagHeight*3);
+  let top = createVector(diagWidth*2, diagHeight);
   
   let plotVectorX = drawEpiCycle(top.x, top.y, dftX , 0);
   let plotVectorY = drawEpiCycle(bottom.x, bottom.y, dftY , HALF_PI);

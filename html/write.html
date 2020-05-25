@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" style="width: fit-content;">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../css/styles.css" />
+  <title>Lee Fourier</title>
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  </style>
+  <script src="../js/p5.min.js"></script>
+  <script src="../js/leepia.js"></script>
+  <script src="../js/fourier.js"></script>
+  <script src="../js/write.js"></script>
+</head>
+
+<body>
+  <div class="menu">
+    <span class="left">
+      <span class="stick" style="font-size:1.2em; font-weight: bold;color: red">Fourier Series & Transformation</span>
+      <span class="stick" style="margin-top:3px;margin-left:10px;">Enter Text here: &nbsp;<input style="margin-top: -5px" id="textMessage" maxlength="30" oninput="configChange()"></span>
+      <span class="stick"><a href="../index.html">Home</a></span>
+      <span class="stick"><a href="./PiaLee.html">PiaLee</a></span>
+    </span>
+    <span class="credit">By Murlidhar Varma</span>
+  </div>
+  <div id="canvas-container"></div>
+</body>
+
+</html>

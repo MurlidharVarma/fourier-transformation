@@ -2,12 +2,41 @@ let width = 0;
 let height = 0;
 let diagWidth = width / 5;
 let diagHeight = 200;
-let noOfCircles = 10;
-let skip = 2;
+let noOfCircles = 2;
+let skip = 1;
 
-let time = 0;
+let time = 0, CANVAS;
 
 ySignal = [];
+
+function configChange(){
+  
+  noOfCircles = parseInt(document.querySelector("#noOfCircles").value);
+  skip = parseInt(document.querySelector("#skip").value);
+
+  document.querySelector("#noOfCirclesValue").innerText = document.querySelector("#noOfCircles").value;
+  document.querySelector("#skipValue").innerText = document.querySelector("#skip").value;
+
+
+  ySignal = [];
+  for (let c=1; c <= noOfCircles; c+=skip){
+    ySignal[c]=[];
+  }
+  time = 0; 
+  FRAME_RATE=60;
+  resizeCanvasSize();
+  redraw();
+}
+
+function resizeCanvasSize(){
+  width = windowWidth;
+
+  diagWidth = width / 4;
+  diagHeight = width/10 * (4 / (1 * PI));
+
+  height = (diagHeight * noOfCircles * 2);
+  resizeCanvas(max(width,2000),max(height,2000)+500);
+}
 
 function setup() {
   width = windowWidth;
@@ -15,9 +44,11 @@ function setup() {
   diagWidth = width / 4;
   diagHeight = width/10 * (4 / (1 * PI));
 
-  height = (diagHeight * noOfCircles * 1.5);
+  height = (diagHeight * noOfCircles * 2);
 
-  createCanvas(width,height);
+  CANVAS = createCanvas(max(width,2000),max(height,2000)+500);
+  CANVAS.parent('canvas-container');
+
   for (let c=1; c <= noOfCircles; c+=skip){
     ySignal[c]=[];
   }
@@ -28,9 +59,9 @@ function draw() {
 
 
   for (let c=1; c <= noOfCircles; c+=skip){
-    let h = 100+(diagHeight*c*2.5/(skip));
+    let h = skip==1? (diagHeight*c*1.75) : (75 + (diagHeight*c*2/skip));
     textSize(28);
-    fill('blue')
+    fill('blue');
     text(c,10,h-diagHeight)
     drawEpiCycle(c, diagWidth, h, c*2+1);
   }
@@ -49,7 +80,7 @@ function drawEpiCycle(idx, posX, posY, maxFreq){
       stroke(255, 100);
       strokeWeight(1);
       noFill();
-      let radius = width/10 * (4 / (freq * PI));
+      let radius = (diagHeight/2) * (4 / (freq * PI));
       ellipse(centerX, centerY, radius*2);
 
       push();
