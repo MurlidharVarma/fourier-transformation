@@ -22,12 +22,19 @@ function setup() {
 
   createCanvas(width,height);
 
-  for(let a=0; a<guitar.length;a++){
-    let x = map(guitar[a]['x'],0,1000, 0, 300);
-    let y = map(guitar[a]['y'],0,1000, 0, 300);
+  for(let a=0; a<leePia.length;a+=2){
+    let x = map(leePia[a]['x'],0,1200, 0, 300);
+    let y = map(leePia[a]['y'],0,1200, 0, 300);
     signalsY.push(y);
     signalsX.push(x);
   }
+
+  // for(let a=0; a<guitar.length;a++){
+  //   let x = map(guitar[a]['x'],0,1000, 0, 300);
+  //   let y = map(guitar[a]['y'],0,1000, 0, 300);
+  //   signalsY.push(y);
+  //   signalsX.push(x);
+  // }
 
   // for(let a=0; a<=360; a++){
   //   let ai = map(a, 0, 360, 0, TWO_PI);
@@ -51,7 +58,7 @@ function setup() {
 
 function draw() {
   background(0);
-  let bottom = createVector(diagWidth, diagHeight*4);
+  let bottom = createVector(diagWidth, diagHeight*3);
   let top = createVector(diagWidth*4, diagHeight);
   
   // push()
@@ -76,8 +83,9 @@ function draw() {
 
     beginShape();
       noFill();
-      strokeWeight(1);
-      stroke('green');
+      strokeWeight(0.75);
+      colorMode(HSB, 100);
+      stroke('yellow');
       for (let i=0; i < plot.length; i++){
         vertex(plot[i].x,plot[i].y);
       }
